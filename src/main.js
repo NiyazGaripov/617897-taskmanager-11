@@ -366,3 +366,7 @@ const createLoadMoreButtonComponent = () => {
     `<button class="load-more" type="button">load more</button>`
   );
 };
+
+const renderComponent = (container, component, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, component);
+};
