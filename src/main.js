@@ -1,5 +1,7 @@
 'use strict';
 
+const taskCards = [0, 1, 2];
+
 const createNavigationMenuComponent = () => {
   return (
     `<section class="control__btn-wrap">
@@ -373,5 +375,18 @@ const renderComponent = (container, component, place = `beforeend`) => {
 
 const pageMainElement = document.querySelector(`.main`);
 const pageMenuElement = pageMainElement.querySelector(`.main__control`);
+
+renderComponent(pageMenuElement, createNavigationMenuComponent());
+renderComponent(pageMainElement, createFilterComponent());
+renderComponent(pageMainElement, createSortComponent());
+
 const taskCardsElement = pageMainElement.querySelector(`.board__tasks`);
 const boardElement = pageMainElement.querySelector(`.board`);
+
+renderComponent(taskCardsElement, createTaskEditCardComponent());
+
+taskCards.forEach(() => {
+  renderComponent(taskCardsElement, createTaskCardComponent());
+});
+
+renderComponent(boardElement, createLoadMoreButtonComponent());
