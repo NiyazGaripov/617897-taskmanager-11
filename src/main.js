@@ -370,3 +370,8 @@ const createLoadMoreButtonComponent = () => {
 const renderComponent = (container, component, place = `beforeend`) => {
   container.insertAdjacentHTML(place, component);
 };
+
+const pageMainElement = document.querySelector(`.main`);
+const pageMenuElement = pageMainElement.querySelector(`.main__control`);
+const taskCardsElement = pageMainElement.querySelector(`.board__tasks`);
+const boardElement = pageMainElement.querySelector(`.board`);
