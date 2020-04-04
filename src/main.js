@@ -1,6 +1,6 @@
 'use strict';
 
-const taskCards = [0, 1, 2];
+const TASK_CARDS_AMOUNT = 3;
 
 const createNavigationMenuComponent = () => {
   return (
@@ -385,8 +385,8 @@ const boardElement = pageMainElement.querySelector(`.board`);
 
 renderComponent(taskCardsElement, createTaskEditCardComponent());
 
-taskCards.forEach(() => {
+for (let i = 0; i < TASK_CARDS_AMOUNT; i++) {
   renderComponent(taskCardsElement, createTaskCardComponent());
-});
+}
 
 renderComponent(boardElement, createLoadMoreButtonComponent());
