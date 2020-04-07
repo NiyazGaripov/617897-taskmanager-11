@@ -1,0 +1,3 @@
+const generateCard = () => {
+  return {};
+};
