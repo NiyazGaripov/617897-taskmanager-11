@@ -1,10 +1,8 @@
 export const createTaskEditCardComponent = (amount) => {
-  const {} = amount;
+  const {description, dueDate, color, repeatingDays} = amount;
 
-  const color = `black`;
   const repeatClass = `card--repeat`;
   const deadlineClass = `card--deadline`;
-  const description = `Here is a card with filled data`;
   const date = `23 September`;
   const time = `16:15`;
 
