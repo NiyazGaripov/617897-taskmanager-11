@@ -1,8 +1,15 @@
 export const createTaskEditCardComponent = (amount) => {
   const {} = amount;
 
+  const color = `black`;
+  const repeatClass = `card--repeat`;
+  const deadlineClass = `card--deadline`;
+  const description = `Here is a card with filled data`;
+  const date = `23 September`;
+  const time = `16:15`;
+
   return (
-    `<article class="card card--edit card--yellow card--repeat">
+    `<article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}">
       <form class="card__form" method="get">
         <div class="card__inner">
           <div class="card__color-bar">
@@ -17,7 +24,7 @@ export const createTaskEditCardComponent = (amount) => {
                 class="card__text"
                 placeholder="Start typing your text here..."
                 name="text"
-              >Here is a card with filled data</textarea>
+              >${description}</textarea>
             </label>
           </div>
 
@@ -35,7 +42,7 @@ export const createTaskEditCardComponent = (amount) => {
                       type="text"
                       placeholder=""
                       name="date"
-                      value="23 September 16:15"
+                      value="${date} ${time}"
                     />
                   </label>
                 </fieldset>
