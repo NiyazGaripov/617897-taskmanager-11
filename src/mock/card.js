@@ -1,5 +1,12 @@
 const generateCard = () => {
-  return {};
+  return {
+    description: `Example default task with default color.`,
+    dueDate: new Date(),
+    color: `black`,
+    repeatingDays: null,
+    isArchive: true,
+    isFavorite: false,
+  };
 };
 
 const generateCards = (amount) => {
