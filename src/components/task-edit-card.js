@@ -1,3 +1,6 @@
+import {MONTH_NAMES} from './../data.js';
+import {getTime} from './utils.js';
+
 export const createTaskEditCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays} = amount;
 
