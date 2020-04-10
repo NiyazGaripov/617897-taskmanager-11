@@ -1,11 +1,11 @@
 const generateCard = () => {
   return {
     description: `Example default task with default color.`,
-    dueDate: new Date(),
+    dueDate: Math.random() > 0.5 ? new Date() : null,
     color: `black`,
     repeatingDays: null,
-    isArchive: true,
-    isFavorite: false,
+    isArchive: Math.random() > 0.5,
+    isFavorite: Math.random() > 0.5,
   };
 };
 
