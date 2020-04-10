@@ -4,10 +4,12 @@ import {getTime} from './utils.js';
 export const createTaskEditCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays} = amount;
 
+  const isExpired = dueDate instanceof Date && dueDate < Date.now();
+  const isDateShowing = !!dueDate;
   const repeatClass = `card--repeat`;
-  const deadlineClass = `card--deadline`;
-  const date = `23 September`;
-  const time = `16:15`;
+  const deadlineClass = isExpired ? `card--deadline` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
+  const time = isDateShowing ? getTime(dueDate) : ``;
 
   return (
     `<article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}">
@@ -33,21 +35,22 @@ export const createTaskEditCardComponent = (amount) => {
             <div class="card__details">
               <div class="card__dates">
                 <button class="card__date-deadline-toggle" type="button">
-                  date: <span class="card__date-status">yes</span>
+                  date: <span class="card__date-status">${isDateShowing ? `yes` : `no`}</span>
                 </button>
 
-                <fieldset class="card__date-deadline">
-                  <label class="card__input-deadline-wrap">
-                    <input
-                      class="card__date"
-                      type="text"
-                      placeholder=""
-                      name="date"
-                      value="${date} ${time}"
-                    />
-                  </label>
-                </fieldset>
-
+                ${isDateShowing ?
+      `<fieldset class="card__date-deadline">
+        <label class="card__input-deadline-wrap">
+          <input
+            class="card__date"
+            type="text"
+            placeholder=""
+            name="date"
+            value="${date} ${time}"
+          />
+        </label>
+      </fieldset>`
+      : ``}
                 <button class="card__repeat-toggle" type="button">
                   repeat:<span class="card__repeat-status">yes</span>
                 </button>
