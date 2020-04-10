@@ -4,10 +4,12 @@ import {getTime} from './utils.js';
 export const createTaskCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = amount;
 
+  const isExpired = dueDate instanceof Date && dueDate < Date.now();
+  const isDateShowing = !!dueDate;
   const repeatClass = `card--repeat`;
-  const deadlineClass = `card--deadline`;
-  const date = `23 September`;
-  const time = `16:15`;
+  const deadlineClass = isExpired ? `card--deadline` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
+  const time = isDateShowing ? getTime(dueDate) : ``;
   const archiveButtonInactiveClass = isArchive ? `` : `card__btn--disabled`;
   const favoriteButtonInactiveClass = isFavorite ? `` : `card__btn--disabled`;
 
