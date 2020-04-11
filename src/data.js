@@ -8,6 +8,14 @@ export const DAYS = [
   `su`
 ];
 
+export const COLORS = [
+  `black`,
+  `yellow`,
+  `blue`,
+  `green`,
+  `pink`
+];
+
 export const MONTH_NAMES = [
   `January`,
   `February`,
