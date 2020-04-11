@@ -1,3 +1,9 @@
+const DESCRIPTION_CARDS = [
+  `Изучить теорию`,
+  `Сделать домашку`,
+  `Пройти интенсив на соточку`,
+];
+
 const DAYS = [
   `mo`,
   `tu`,
@@ -31,4 +37,4 @@ const MONTH_NAMES = [
   `December`,
 ];
 
-export {DAYS, COLORS, MONTH_NAMES};
+export {DESCRIPTION_CARDS, DAYS, COLORS, MONTH_NAMES};

@@ -1,11 +1,5 @@
 import {getRandomIntegerNumber, getRandomArrayItem} from './../utils.js';
-import {COLORS} from './../data.js';
-
-const DESCRIPTION_CARDS = [
-  `Изучить теорию`,
-  `Сделать домашку`,
-  `Пройти интенсив на соточку`,
-];
+import {DESCRIPTION_CARDS, COLORS} from './../data.js';
 
 const DefaultRepeatingDays = {
   "mo": false,
