@@ -1,5 +1,5 @@
 import {MONTH_NAMES} from './../data.js';
-import {getTime} from './utils.js';
+import {getTime} from './../utils.js';
 
 export const createTaskCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = amount;
