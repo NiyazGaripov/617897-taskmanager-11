@@ -6,7 +6,8 @@ export const createTaskEditCardComponent = (amount) => {
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
-  const repeatClass = `card--repeat`;
+  const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
+  const repeatClass = isRepeatingTask ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? getTime(dueDate) : ``;
