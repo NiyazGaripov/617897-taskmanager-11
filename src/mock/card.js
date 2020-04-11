@@ -26,6 +26,12 @@ const getRandomDate = () => {
   return targetDate;
 };
 
+const generateRepeatingDays = () => {
+  return Object.assign({}, DefaultRepeatingDays, {
+    "mo": Math.random() > 0.5,
+  });
+};
+
 const generateCard = () => {
   return {
     description: `Example default task with default color.`,
