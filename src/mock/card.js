@@ -1,4 +1,5 @@
 import {getRandomIntegerNumber, getRandomArrayItem} from './../utils.js';
+import {COLORS} from './../data.js';
 
 const DESCRIPTION_CARDS = [
   `Изучить теорию`,
@@ -38,7 +39,7 @@ const generateCard = () => {
   return {
     description: getRandomArrayItem(DESCRIPTION_CARDS),
     dueDate,
-    color: `black`,
+    color: getRandomArrayItem(COLORS),
     repeatingDays: Object.assign({}, DefaultRepeatingDays, {"mo": Math.random() > 0.5}),
     isArchive: Math.random() > 0.5,
     isFavorite: Math.random() > 0.5,
