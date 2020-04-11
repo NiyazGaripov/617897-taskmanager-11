@@ -53,7 +53,7 @@ export const createTaskEditCardComponent = (amount) => {
       </fieldset>`
       : ``}
                 <button class="card__repeat-toggle" type="button">
-                  repeat:<span class="card__repeat-status">yes</span>
+                  repeat:<span class="card__repeat-status">${isRepeatingTask ? `yes` : `no`}</span>
                 </button>
 
                 <fieldset class="card__repeat-days">
