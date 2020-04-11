@@ -1,4 +1,4 @@
-import {MONTH_NAMES} from './../data.js';
+import {MONTH_NAMES} from './../constants.js';
 import {getTime} from './../utils.js';
 
 const createTaskCardComponent = (amount) => {

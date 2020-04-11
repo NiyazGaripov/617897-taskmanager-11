@@ -1,5 +1,5 @@
 import {getRandomIntegerNumber, getRandomArrayItem} from './../utils.js';
-import {DESCRIPTION_CARDS, COLORS} from './../data.js';
+import {DESCRIPTION_CARDS, COLORS} from './../constants.js';
 
 const DefaultRepeatingDays = {
   "mo": false,
