@@ -40,7 +40,7 @@ const generateCard = () => {
     description: getRandomArrayItem(DESCRIPTION_CARDS),
     dueDate,
     color: getRandomArrayItem(COLORS),
-    repeatingDays: Object.assign({}, DefaultRepeatingDays, {"mo": Math.random() > 0.5}),
+    repeatingDays: dueDate ? DefaultRepeatingDays : generateRepeatingDays(),
     isArchive: Math.random() > 0.5,
     isFavorite: Math.random() > 0.5,
   };
