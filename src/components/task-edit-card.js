@@ -1,6 +1,7 @@
-import {MONTH_NAMES, DAYS} from './../data.js';
+import {MONTH_NAMES, DAYS, COLORS} from './../data.js';
 import {getTime} from './utils.js';
 import {createRepeatingDaysComponent} from './days.js';
+import {createColorsComponent} from './colors.js';
 
 export const createTaskEditCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays} = amount;
@@ -13,6 +14,7 @@ export const createTaskEditCardComponent = (amount) => {
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? getTime(dueDate) : ``;
   const repeatingDaysComponent = createRepeatingDaysComponent(DAYS, repeatingDays);
+  const colorsComponent = createColorsComponent(COLORS, color);
 
   return (
     `<article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}">
@@ -72,67 +74,7 @@ export const createTaskEditCardComponent = (amount) => {
             <div class="card__colors-inner">
               <h3 class="card__colors-title">Color</h3>
               <div class="card__colors-wrap">
-                <input
-                  type="radio"
-                  id="color-black-4"
-                  class="card__color-input card__color-input--black visually-hidden"
-                  name="color"
-                  value="black"
-                />
-                <label
-                  for="color-black-4"
-                  class="card__color card__color--black"
-                  >black</label
-                >
-                <input
-                  type="radio"
-                  id="color-yellow-4"
-                  class="card__color-input card__color-input--yellow visually-hidden"
-                  name="color"
-                  value="yellow"
-                  checked
-                />
-                <label
-                  for="color-yellow-4"
-                  class="card__color card__color--yellow"
-                  >yellow</label
-                >
-                <input
-                  type="radio"
-                  id="color-blue-4"
-                  class="card__color-input card__color-input--blue visually-hidden"
-                  name="color"
-                  value="blue"
-                />
-                <label
-                  for="color-blue-4"
-                  class="card__color card__color--blue"
-                  >blue</label
-                >
-                <input
-                  type="radio"
-                  id="color-green-4"
-                  class="card__color-input card__color-input--green visually-hidden"
-                  name="color"
-                  value="green"
-                />
-                <label
-                  for="color-green-4"
-                  class="card__color card__color--green"
-                  >green</label
-                >
-                <input
-                  type="radio"
-                  id="color-pink-4"
-                  class="card__color-input card__color-input--pink visually-hidden"
-                  name="color"
-                  value="pink"
-                />
-                <label
-                  for="color-pink-4"
-                  class="card__color card__color--pink"
-                  >pink</label
-                >
+                ${colorsComponent}
               </div>
             </div>
           </div>
