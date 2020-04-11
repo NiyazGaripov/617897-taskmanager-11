@@ -33,9 +33,11 @@ const generateRepeatingDays = () => {
 };
 
 const generateCard = () => {
+  const dueDate = Math.random() > 0.5 ? null : getRandomDate();
+
   return {
     description: `Example default task with default color.`,
-    dueDate: Math.random() > 0.5 ? new Date() : null,
+    dueDate,
     color: `black`,
     repeatingDays: Object.assign({}, DefaultRepeatingDays, {"mo": Math.random() > 0.5}),
     isArchive: Math.random() > 0.5,
