@@ -1,5 +1,5 @@
-const createFilterItemComponent = (filter, isChecked) => {
-  const {name, count} = filter;
+const createFiltersComponent = (filters, isChecked) => {
+  const {name, count} = filters;
 
   return (
     `<input
