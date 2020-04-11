@@ -1,4 +1,4 @@
-export const createNavigationMenuComponent = () => {
+const createNavigationMenuComponent = () => {
   return (
     `<section class="control__btn-wrap">
       <input
@@ -30,3 +30,5 @@ export const createNavigationMenuComponent = () => {
     </section>`
   );
 };
+
+export {createNavigationMenuComponent};

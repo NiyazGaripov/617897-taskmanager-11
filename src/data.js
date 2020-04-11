@@ -1,4 +1,4 @@
-export const DAYS = [
+const DAYS = [
   `mo`,
   `tu`,
   `we`,
@@ -8,7 +8,7 @@ export const DAYS = [
   `su`
 ];
 
-export const COLORS = [
+const COLORS = [
   `black`,
   `yellow`,
   `blue`,
@@ -16,7 +16,7 @@ export const COLORS = [
   `pink`
 ];
 
-export const MONTH_NAMES = [
+const MONTH_NAMES = [
   `January`,
   `February`,
   `March`,
@@ -30,3 +30,5 @@ export const MONTH_NAMES = [
   `November`,
   `December`,
 ];
+
+export {DAYS, COLORS, MONTH_NAMES};

@@ -1,4 +1,4 @@
-export const createFilterComponent = () => {
+const createFilterComponent = () => {
   return (
     `<section class="main__filter filter container">
       <input
@@ -61,3 +61,5 @@ export const createFilterComponent = () => {
     </section>`
   );
 };
+
+export {createFilterComponent};

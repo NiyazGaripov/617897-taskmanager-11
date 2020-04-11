@@ -1,4 +1,4 @@
-export const createRepeatingDaysComponent = (days, repeatingDays) => {
+const createRepeatingDaysComponent = (days, repeatingDays) => {
   return days
     .map((day, index) => {
       const isChecked = repeatingDays[day];
@@ -18,3 +18,5 @@ export const createRepeatingDaysComponent = (days, repeatingDays) => {
     })
     .join(`\n`);
 };
+
+export {createRepeatingDaysComponent};

@@ -1,7 +1,7 @@
 import {MONTH_NAMES} from './../data.js';
 import {getTime} from './../utils.js';
 
-export const createTaskCardComponent = (amount) => {
+const createTaskCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = amount;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
@@ -59,3 +59,5 @@ export const createTaskCardComponent = (amount) => {
     </article>`
   );
 };
+
+export {createTaskCardComponent};

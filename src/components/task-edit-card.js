@@ -3,7 +3,7 @@ import {getTime} from './../utils.js';
 import {createRepeatingDaysComponent} from './days.js';
 import {createColorsComponent} from './colors.js';
 
-export const createTaskEditCardComponent = (amount) => {
+const createTaskEditCardComponent = (amount) => {
   const {description, dueDate, color, repeatingDays} = amount;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
@@ -88,3 +88,5 @@ export const createTaskEditCardComponent = (amount) => {
     </article>`
   );
 };
+
+export {createTaskEditCardComponent};

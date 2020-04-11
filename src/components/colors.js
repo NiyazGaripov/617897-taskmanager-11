@@ -1,4 +1,4 @@
-export const createColorsComponent = (colors, currentColor) => {
+const createColorsComponent = (colors, currentColor) => {
   return colors
     .map((color, index) => {
       return (
@@ -19,3 +19,5 @@ export const createColorsComponent = (colors, currentColor) => {
     })
     .join(`\n`);
 };
+
+export {createColorsComponent};
