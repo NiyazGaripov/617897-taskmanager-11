@@ -1,3 +1,9 @@
+const DESCRIPTION_CARDS = [
+  `Изучить теорию`,
+  `Сделать домашку`,
+  `Пройти интенсив на соточку`,
+];
+
 const DefaultRepeatingDays = {
   "mo": false,
   "tu": false,
