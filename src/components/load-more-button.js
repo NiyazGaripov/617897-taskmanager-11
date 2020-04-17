@@ -1,5 +1,7 @@
-export const createLoadMoreButtonComponent = () => {
+const createLoadMoreButtonComponent = () => {
   return (
     `<button class="load-more" type="button">load more</button>`
   );
 };
+
+export {createLoadMoreButtonComponent};

@@ -1,4 +1,4 @@
-export const createSortComponent = () => {
+const createSortComponent = () => {
   return (
     `<section class="board container">
       <div class="board__filter-list">
@@ -11,3 +11,5 @@ export const createSortComponent = () => {
     </section>`
   );
 };
+
+export {createSortComponent};
