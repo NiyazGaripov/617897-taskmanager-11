@@ -2,13 +2,13 @@ import {getRandomIntegerNumber, getRandomArrayItem} from './../utils.js';
 import {DESCRIPTION_CARDS, COLORS} from './../constants.js';
 
 const DefaultRepeatingDays = {
-  "mo": false,
-  "tu": false,
-  "we": false,
-  "th": false,
-  "fr": false,
-  "sa": false,
-  "su": false,
+  mo: false,
+  tu: false,
+  we: false,
+  th: false,
+  fr: false,
+  sa: false,
+  su: false,
 };
 
 const getRandomDate = () => {
@@ -23,7 +23,7 @@ const getRandomDate = () => {
 
 const generateRepeatingDays = () => {
   return Object.assign({}, DefaultRepeatingDays, {
-    "mo": Math.random() > 0.5,
+    mo: Math.random() > 0.5,
   });
 };
 
