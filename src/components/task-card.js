@@ -77,6 +77,10 @@ class Task {
 
     return this._element;
   }
+
+  removeElement() {
+    this._element = null;
+  }
 }
 
 export {createTaskCardComponent, Task};
