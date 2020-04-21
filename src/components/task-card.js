@@ -60,4 +60,11 @@ const createTaskCardComponent = (amount) => {
   );
 };
 
-export {createTaskCardComponent};
+class Task {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+}
+
+export {createTaskCardComponent, Task};
