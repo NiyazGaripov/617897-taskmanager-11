@@ -23,4 +23,11 @@ const getRandomArrayItem = (array) => {
   return array[randomItem];
 };
 
-export {renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem}
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+export {renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement};
