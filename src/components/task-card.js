@@ -65,6 +65,10 @@ class Task {
     this._task = task;
     this._element = null;
   }
+
+  getTemplate() {
+    return createTaskCardComponent(this._task);
+  }
 }
 
 export {createTaskCardComponent, Task};
