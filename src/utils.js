@@ -1,5 +1,17 @@
-const renderComponent = (container, component, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, component);
+const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
+const renderComponent = (container, component, place) => {
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(component);
+      break;
+    case RenderPosition.BEFOREEND:
+      container.append(component);
+      break;
+  }
 };
 
 const setTimeFormat = (value) => {
@@ -30,4 +42,4 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export {renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement};
+export {RenderPosition, renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement};
