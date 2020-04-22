@@ -2,9 +2,7 @@ import {createElement} from './../utils.js';
 
 const createBoardComponent = () => {
   return (
-    `<section class="board container">
-      <div class="board__tasks"></div>
-    </section>`
+    `<section class="board container"></section>`
   );
 };
 
