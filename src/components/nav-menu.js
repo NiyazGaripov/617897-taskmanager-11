@@ -1,3 +1,5 @@
+import {createElement} from './../utils.js';
+
 const createNavigationMenuComponent = () => {
   return (
     `<section class="control__btn-wrap">
@@ -31,4 +33,26 @@ const createNavigationMenuComponent = () => {
   );
 };
 
-export {createNavigationMenuComponent};
+class NavigationMenu {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createNavigationMenuComponent();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
+
+export {NavigationMenu};
