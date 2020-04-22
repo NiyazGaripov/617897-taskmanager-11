@@ -83,4 +83,4 @@ class Task {
   }
 }
 
-export {createTaskCardComponent, Task};
+export {Task};
