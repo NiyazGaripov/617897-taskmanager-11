@@ -1,8 +1,8 @@
 import {MONTH_NAMES} from './../constants.js';
 import {getTime, createElement} from './../utils.js';
 
-const createTaskCardComponent = (amount) => {
-  const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = amount;
+const createTaskCardComponent = (task) => {
+  const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = task;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
@@ -60,7 +60,7 @@ const createTaskCardComponent = (amount) => {
   );
 };
 
-class Task {
+class TaskCard {
   constructor(task) {
     this._task = task;
     this._element = null;
@@ -83,4 +83,4 @@ class Task {
   }
 }
 
-export {Task};
+export {TaskCard};
