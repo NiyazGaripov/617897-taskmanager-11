@@ -1,18 +1,18 @@
 import {createElement} from './../utils.js';
 
-const createLoadMoreButtonComponent = () => {
+const createBoardComponent = () => {
   return (
-    `<button class="load-more" type="button">load more</button>`
+    `<section class="board container"></section>`
   );
 };
 
-class LoadMoreButton {
+class Board {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createLoadMoreButtonComponent();
+    return createBoardComponent();
   }
 
   getElement() {
@@ -28,4 +28,4 @@ class LoadMoreButton {
   }
 }
 
-export {LoadMoreButton};
+export {Board};

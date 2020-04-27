@@ -1,5 +1,17 @@
+const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
 const renderComponent = (container, component, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, component);
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(component);
+      break;
+    case RenderPosition.BEFOREEND:
+      container.append(component);
+      break;
+  }
 };
 
 const setTimeFormat = (value) => {
@@ -23,4 +35,11 @@ const getRandomArrayItem = (array) => {
   return array[randomItem];
 };
 
-export {renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem}
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+export {RenderPosition, renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement};
