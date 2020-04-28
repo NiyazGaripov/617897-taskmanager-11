@@ -16,21 +16,25 @@ const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, card) => {
-  const onEditButtonClick = () => {
+  const replaceTaskToEdit = () => {
     taskCardsElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
   };
 
-  const onEditFormSubmit = () => {
+  const replaceEditToTask = () => {
     taskCardsElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
   };
 
   const taskComponent = new TaskCard(card);
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
-  editButton.addEventListener(`click`, onEditButtonClick);
+  editButton.addEventListener(`click`, () => {
+    replaceTaskToEdit();
+  });
 
   const taskEditComponent = new TaskEditCard(card);
   const editForm = taskEditComponent.getElement().querySelector(`form`);
-  editForm.addEventListener(`submit`, onEditFormSubmit);
+  editForm.addEventListener(`submit`, () => {
+    replaceEditToTask();
+  });
 
   renderComponent(taskCardsElement, taskComponent.getElement());
 };
