@@ -17,11 +17,11 @@ const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, card) => {
   const onEditButtonClick = () => {
-    taskCardsElement.replaceChild(TaskEditCard.getElement(), TaskCard.getElement());
+    taskCardsElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
   };
 
   const onEditFormSubmit = () => {
-    taskCardsElement.replaceChild(TaskCard.getElement(), TaskEditCard.getElement());
+    taskCardsElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
   };
 
   const taskComponent = new TaskCard(card);
