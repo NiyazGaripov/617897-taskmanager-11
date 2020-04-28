@@ -7,6 +7,7 @@ import {Sort} from './components/sort.js';
 import {TaskEditCard} from './components/task-edit-card.js';
 import {TaskCard} from './components/task-card.js';
 import {LoadMoreButton} from './components/load-more-button.js';
+import {NoTaskList} from './components/no-tasks.js';
 import {generateCards} from './mock/card.js';
 import {generateFilters} from './mock/filter.js';
 
