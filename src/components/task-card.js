@@ -14,7 +14,7 @@ const createTaskCardComponent = (task) => {
   const favoriteButtonInactiveClass = isFavorite ? `` : `card__btn--disabled`;
 
   return (
-    `<article class="card card--card--${color} ${repeatClass} ${deadlineClass}">
+    `<article class="card card--${color} ${repeatClass} ${deadlineClass}">
       <div class="card__form">
         <div class="card__inner">
           <div class="card__control">
