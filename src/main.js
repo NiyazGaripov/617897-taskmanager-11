@@ -52,6 +52,13 @@ const renderTaskCards = (taskCardsElement, card) => {
 };
 
 const renderBoard = (boardComponent, cards) => {
+  const isAllTasksArchived = cards.every((card) => card.isArchive);
+
+  if (isAllTasksArchived) {
+    renderComponent(boardComponent.getElement(), new NoTaskList().getElement());
+    return;
+  }
+
   renderComponent(boardComponent.getElement(), new Sort().getElement());
   renderComponent(boardComponent.getElement(), new TaskList().getElement());
 
