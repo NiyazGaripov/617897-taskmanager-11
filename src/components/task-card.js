@@ -1,5 +1,5 @@
 import {MONTH_NAMES} from './../constants.js';
-import {getTime} from './../utils.js';
+import {getTime} from './../utils/time.js';
 import {AbstractComponent} from './abstract-component.js';
 
 const createTaskCardComponent = (task) => {

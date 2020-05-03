@@ -1,5 +1,5 @@
 import {MONTH_NAMES, DAYS, COLORS} from './../constants.js';
-import {getTime} from './../utils.js';
+import {getTime} from './../utils/time.js';
 import {createRepeatingDaysComponent} from './days.js';
 import {createColorsComponent} from './colors.js';
 import {AbstractComponent} from './abstract-component.js';
