@@ -1,4 +1,4 @@
-import {renderComponent} from './utils.js';
+import {renderComponent} from './utils/render.js';
 import {NavigationMenu} from './components/nav-menu.js';
 import {Filter} from './components/filter.js';
 import {Board} from './components/board.js';
