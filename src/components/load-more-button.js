@@ -10,6 +10,10 @@ class LoadMoreButton extends AbstractComponent {
   getTemplate() {
     return createLoadMoreButtonComponent();
   }
+
+  setClickHandler(callback) {
+    this.getElement().addEventListener(`click`, callback);
+  }
 }
 
 export {LoadMoreButton};
