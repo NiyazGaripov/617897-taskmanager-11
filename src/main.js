@@ -79,8 +79,7 @@ const renderBoard = (boardComponent, cards) => {
       .forEach((card) => renderTaskCards(taskCardsElement, card));
 
     if (showingTasksAmount >= cards.length) {
-      removeComponent(loadMoreButtonComponent.getElement());
-      loadMoreButtonComponent.removeElement();
+      removeComponent(loadMoreButtonComponent);
     }
   });
 };
