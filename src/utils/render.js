@@ -25,4 +25,6 @@ const replaceComponent = (parent, newComponent, oldComponent) => {
   parent.replaceChild(newComponent, oldComponent);
 };
 
-export {RenderPosition, renderComponent, createElement, replaceComponent};
+const removeComponent = (component) => component.remove();
+
+export {RenderPosition, renderComponent, createElement, replaceComponent, removeComponent};
