@@ -42,4 +42,12 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export {RenderPosition, renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement};
+const onEscKeyDown = (evt, calback) => {
+  const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+
+  if (isEscKey) {
+    calback();
+  }
+};
+
+export {RenderPosition, renderComponent, getTime, getRandomIntegerNumber, getRandomArrayItem, createElement, onEscKeyDown};
