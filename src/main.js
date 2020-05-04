@@ -1,4 +1,4 @@
-import {renderComponent} from './utils/render.js';
+import {renderComponent, replaceComponent} from './utils/render.js';
 import {onEscKeyDown} from './utils/common.js';
 import {NavigationMenu} from './components/nav-menu.js';
 import {Filter} from './components/filter.js';
@@ -19,11 +19,11 @@ const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, card) => {
   const replaceTaskToEdit = () => {
-    taskCardsElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
+    replaceComponent(taskCardsElement, taskEditComponent.getElement(), taskComponent.getElement());
   };
 
   const replaceEditToTask = () => {
-    taskCardsElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+    replaceComponent(taskCardsElement, taskComponent.getElement(), taskEditComponent.getElement());
   };
 
   const onCardCloseEsc = (evt) => {
