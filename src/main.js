@@ -33,7 +33,8 @@ const renderTaskCards = (taskCardsElement, card) => {
 
   const taskComponent = new TaskCard(card);
 
-  taskComponent.setEditButtonClickHandler(() => {
+  taskComponent.setEditButtonClickHandler((evt) => {
+    evt.preventDefault();
     replaceTaskToEdit();
     document.addEventListener(`keydown`, onCardCloseEsc);
   });
