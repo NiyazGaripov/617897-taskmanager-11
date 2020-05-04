@@ -1,4 +1,4 @@
-import {renderComponent, replaceComponent} from './utils/render.js';
+import {renderComponent, replaceComponent, removeComponent} from './utils/render.js';
 import {onEscKeyDown} from './utils/common.js';
 import {NavigationMenu} from './components/nav-menu.js';
 import {Filter} from './components/filter.js';
@@ -79,7 +79,7 @@ const renderBoard = (boardComponent, cards) => {
       .forEach((card) => renderTaskCards(taskCardsElement, card));
 
     if (showingTasksAmount >= cards.length) {
-      loadMoreButtonComponent.getElement().remove();
+      removeComponent(loadMoreButtonComponent.getElement());
       loadMoreButtonComponent.removeElement();
     }
   });
