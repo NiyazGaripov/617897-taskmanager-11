@@ -19,11 +19,11 @@ const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, card) => {
   const replaceTaskToEdit = () => {
-    replaceComponent(taskCardsElement, taskEditComponent.getElement(), taskComponent.getElement());
+    replaceComponent(taskEditComponent, taskComponent);
   };
 
   const replaceEditToTask = () => {
-    replaceComponent(taskCardsElement, taskComponent.getElement(), taskEditComponent.getElement());
+    replaceComponent(taskComponent, taskEditComponent);
   };
 
   const onCardCloseEsc = (evt) => {
