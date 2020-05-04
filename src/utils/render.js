@@ -21,4 +21,8 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export {RenderPosition, renderComponent, createElement};
+const replaceComponent = (parent, newComponent, oldComponent) => {
+  parent.replaceChild(newComponent, oldComponent);
+};
+
+export {RenderPosition, renderComponent, createElement, replaceComponent};
