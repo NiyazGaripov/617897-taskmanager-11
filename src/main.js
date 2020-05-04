@@ -71,7 +71,7 @@ const renderBoard = (boardComponent, cards) => {
 
   renderComponent(boardComponent.getElement(), loadMoreButtonComponent);
 
-  loadMoreButtonComponent.getElement().addEventListener(`click`, () => {
+  loadMoreButtonComponent.setClickHandler(() => {
     const prevTasksCount = showingTasksAmount;
     showingTasksAmount = showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
 
