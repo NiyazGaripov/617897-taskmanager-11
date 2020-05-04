@@ -1,3 +1,5 @@
+const ESC_KEYCODE = 27;
+
 const getRandomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
 };
@@ -8,4 +10,10 @@ const getRandomArrayItem = (array) => {
   return array[randomItem];
 };
 
-export {getRandomIntegerNumber, getRandomArrayItem};
+const onEscKeyDown = (evt, calback) => {
+  if (evt.keyCode === ESC_KEYCODE) {
+    calback();
+  }
+};
+
+export {getRandomIntegerNumber, getRandomArrayItem, onEscKeyDown};
