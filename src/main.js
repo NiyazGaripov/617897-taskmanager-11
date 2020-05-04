@@ -1,4 +1,5 @@
 import {renderComponent} from './utils/render.js';
+import {onEscKeyDown} from './utils.js';
 import {NavigationMenu} from './components/nav-menu.js';
 import {Filter} from './components/filter.js';
 import {Board} from './components/board.js';
@@ -7,6 +8,7 @@ import {Sort} from './components/sort.js';
 import {TaskEditCard} from './components/task-edit-card.js';
 import {TaskCard} from './components/task-card.js';
 import {LoadMoreButton} from './components/load-more-button.js';
+import {NoTaskList} from './components/no-tasks.js';
 import {generateCards} from './mock/card.js';
 import {generateFilters} from './mock/filter.js';
 
@@ -16,26 +18,44 @@ const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, card) => {
-  const onEditButtonClick = () => {
-    taskCardsElement.replaceChild(TaskEditCard.getElement(), TaskCard.getElement());
+  const replaceTaskToEdit = () => {
+    taskCardsElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
   };
 
-  const onEditFormSubmit = () => {
-    taskCardsElement.replaceChild(TaskCard.getElement(), TaskEditCard.getElement());
+  const replaceEditToTask = () => {
+    taskCardsElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+  };
+
+  const onCardCloseEsc = (evt) => {
+    onEscKeyDown(evt, replaceEditToTask);
+    document.removeEventListener(`keydown`, onCardCloseEsc);
   };
 
   const taskComponent = new TaskCard(card);
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
-  editButton.addEventListener(`click`, onEditButtonClick);
+  editButton.addEventListener(`click`, () => {
+    replaceTaskToEdit();
+    document.addEventListener(`keydown`, onCardCloseEsc);
+  });
 
   const taskEditComponent = new TaskEditCard(card);
   const editForm = taskEditComponent.getElement().querySelector(`form`);
-  editForm.addEventListener(`submit`, onEditFormSubmit);
+  editForm.addEventListener(`submit`, () => {
+    replaceEditToTask();
+    document.removeEventListener(`keydown`, onCardCloseEsc);
+  });
 
   renderComponent(taskCardsElement, taskComponent.getElement());
 };
 
 const renderBoard = (boardComponent, cards) => {
+  const isAllTasksArchived = cards.every((card) => card.isArchive);
+
+  if (isAllTasksArchived) {
+    renderComponent(boardComponent.getElement(), new NoTaskList().getElement());
+    return;
+  }
+
   renderComponent(boardComponent.getElement(), new Sort().getElement());
   renderComponent(boardComponent.getElement(), new TaskList().getElement());
 
