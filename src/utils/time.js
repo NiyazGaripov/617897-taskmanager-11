@@ -3,7 +3,7 @@ const setTimeFormat = (value) => {
 };
 
 const getTime = (date) => {
-  const hours = setTimeFormat(date.getHours() % 12);
+  const hours = setTimeFormat(date.getHours() % 24);
   const minutes = setTimeFormat(date.getMinutes());
 
   return `${hours}:${minutes}`;
