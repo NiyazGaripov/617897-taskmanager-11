@@ -1,4 +1,4 @@
-import {getRandomIntegerNumber, getRandomArrayItem} from './../utils/math.js';
+import {getRandomIntegerNumber, getRandomArrayItem} from './../utils/common.js';
 import {DESCRIPTION_CARDS, COLORS} from './../constants.js';
 
 const DefaultRepeatingDays = {
