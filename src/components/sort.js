@@ -1,4 +1,5 @@
 import {AbstractComponent} from './abstract-component.js';
+import {SortType} from './../constants.js';
 
 const createSortComponent = () => {
   return (
