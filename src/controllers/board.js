@@ -95,7 +95,16 @@ class BoardController {
     renderLoadMoreButton();
 
     this._sortComponent.setSortTypeChangeHandler(() => {
+      showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
 
+      taskCardsElement.innerHTML = ``;
+
+      cards.slice(BEGIN_INDEX, showingTasksAmount)
+        .forEach((card) => {
+          renderTaskCards(taskCardsElement, card);
+        });
+
+      renderLoadMoreButton();
     });
   }
 }
