@@ -6,6 +6,7 @@ import {TaskEditCard} from './../components/task-edit-card.js';
 import {TaskCard} from './../components/task-card.js';
 import {LoadMoreButton} from './../components/load-more-button.js';
 import {NoTaskList} from './../components/no-tasks.js';
+import {SortType} from './../constants.js';
 
 const TASK_CARDS_AMOUNT_ON_START = 8;
 const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
@@ -41,6 +42,25 @@ const renderTaskCards = (taskCardsElement, card) => {
   });
 
   renderComponent(taskCardsElement, taskComponent);
+};
+
+const sortTasks = (tasks, sortType, from, to) => {
+  let sortedTasks = [];
+  const showingTasks = tasks.slice();
+
+  switch (sortType) {
+    case SortType.DATE_UP:
+      sortedTasks = showingTasks.sort((a, b) => a.dueDate - b.dueDate);
+      break;
+    case SortType.DATE_DOWN:
+      sortedTasks = showingTasks.sort((a, b) => b.dueDate - a.dueDate);
+      break;
+    case SortType.DEFAULT:
+      sortedTasks = showingTasks;
+      break;
+  }
+
+  return sortedTasks.slice(from, to);
 };
 
 class BoardController {
