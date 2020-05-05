@@ -12,6 +12,11 @@ const createSortComponent = () => {
 };
 
 class Sort extends AbstractComponent {
+  constructor() {
+    super();
+    this._currenSortType = SortType.DEFAULT;
+  }
+
   getTemplate() {
     return createSortComponent();
   }
