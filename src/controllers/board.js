@@ -12,7 +12,7 @@ const TASK_CARDS_AMOUNT_ON_START = 8;
 const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
 
-const renderTaskCards = (taskCardsElement, card) => {
+const renderTaskCard = (taskCardsElement, card) => {
   const replaceTaskToEdit = () => {
     replaceComponent(taskEditComponent, taskComponent);
   };
@@ -42,6 +42,12 @@ const renderTaskCards = (taskCardsElement, card) => {
   });
 
   renderComponent(taskCardsElement, taskComponent);
+};
+
+const renderTaskCards = (taskCardsElement, cards) => {
+  cards.forEach((card) => {
+    renderTaskCard(taskCardsElement, card);
+  });
 };
 
 const sortTasks = (tasks, sortType, from, to) => {
@@ -87,8 +93,9 @@ class BoardController {
         const prevTasksCount = showingTasksAmount;
         showingTasksAmount = showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
 
-        cards.slice(prevTasksCount, showingTasksAmount)
-          .forEach((card) => renderTaskCards(taskCardsElement, card));
+        const sortedTasks = sortTasks(cards, this._sortComponent.getSortType(), prevTasksCount, showingTasksAmount);
+
+        renderTaskCards(taskCardsElement, sortedTasks);
 
         if (showingTasksAmount >= cards.length) {
           removeComponent(this._loadMoreButtonComponent);
@@ -107,23 +114,18 @@ class BoardController {
     const taskCardsElement = this._taskListComponent.getElement();
 
     let showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
-    cards.slice(BEGIN_INDEX, showingTasksAmount)
-      .forEach((card) => {
-        renderTaskCards(taskCardsElement, card);
-      });
 
+    renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, showingTasksAmount));
     renderLoadMoreButton();
 
-    this._sortComponent.setSortTypeChangeHandler(() => {
+    this._sortComponent.setSortTypeChangeHandler((sortType) => {
       showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
+
+      const sortedTasks = sortTasks(cards, sortType, BEGIN_INDEX, showingTasksAmount);
 
       taskCardsElement.innerHTML = ``;
 
-      cards.slice(BEGIN_INDEX, showingTasksAmount)
-        .forEach((card) => {
-          renderTaskCards(taskCardsElement, card);
-        });
-
+      renderTaskCards(taskCardsElement, sortedTasks);
       renderLoadMoreButton();
     });
   }
