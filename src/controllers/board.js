@@ -48,27 +48,6 @@ class BoardController {
     const container = this._container.getElement();
     const isAllTasksArchived = cards.every((card) => card.isArchive);
 
-    const renderLoadMoreButton = () => {
-      if (showingTasksAmount >= cards.length) {
-        return;
-      }
-
-      renderComponent(container, this._loadMoreButtonComponent);
-
-      this._loadMoreButtonComponent.setClickHandler(() => {
-        const prevTasksCount = showingTasksAmount;
-        showingTasksAmount = showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
-
-        const sortedTasks = sortTasks(cards, this._sortComponent.getSortType(), prevTasksCount, showingTasksAmount);
-
-        renderTaskCards(taskCardsElement, sortedTasks);
-
-        if (showingTasksAmount >= cards.length) {
-          removeComponent(this._loadMoreButtonComponent);
-        }
-      });
-    };
-
     if (isAllTasksArchived) {
       renderComponent(container, this._noTasksComponent);
       return;
@@ -82,7 +61,7 @@ class BoardController {
     let showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
 
     renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, showingTasksAmount));
-    renderLoadMoreButton();
+    this._renderLoadMoreButton();
 
     this._sortComponent.setSortTypeChangeHandler((sortType) => {
       showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
@@ -92,7 +71,28 @@ class BoardController {
       taskCardsElement.innerHTML = ``;
 
       renderTaskCards(taskCardsElement, sortedTasks);
-      renderLoadMoreButton();
+      this._renderLoadMoreButton();
+    });
+  }
+
+  _renderLoadMoreButton() {
+    if (showingTasksAmount >= cards.length) {
+      return;
+    }
+
+    renderComponent(container, this._loadMoreButtonComponent);
+
+    this._loadMoreButtonComponent.setClickHandler(() => {
+      const prevTasksCount = showingTasksAmount;
+      showingTasksAmount = showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
+
+      const sortedTasks = sortTasks(cards, this._sortComponent.getSortType(), prevTasksCount, showingTasksAmount);
+
+      renderTaskCards(taskCardsElement, sortedTasks);
+
+      if (showingTasksAmount >= cards.length) {
+        removeComponent(this._loadMoreButtonComponent);
+      }
     });
   }
 }
