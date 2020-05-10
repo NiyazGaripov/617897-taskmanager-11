@@ -1,9 +1,7 @@
-import {renderComponent, replaceComponent, removeComponent} from './../utils/render.js';
-import {onEscKeyDown} from './../utils/common.js';
+import {renderComponent, removeComponent} from './../utils/render.js';
 import {TaskList} from './../components/task-list.js';
 import {Sort} from './../components/sort.js';
-import {TaskEditCard} from './../components/task-edit-card.js';
-import {TaskCard} from './../components/task-card.js';
+import {TaskController} from './../controllers/task.js';
 import {LoadMoreButton} from './../components/load-more-button.js';
 import {NoTaskList} from './../components/no-tasks.js';
 import {SortType} from './../constants.js';
@@ -11,38 +9,6 @@ import {SortType} from './../constants.js';
 const TASK_CARDS_AMOUNT_ON_START = 8;
 const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
-
-const renderTaskCard = (taskCardsElement, card) => {
-  const replaceTaskToEdit = () => {
-    replaceComponent(taskEditComponent, taskComponent);
-  };
-
-  const replaceEditToTask = () => {
-    replaceComponent(taskComponent, taskEditComponent);
-  };
-
-  const onCardCloseEsc = (evt) => {
-    onEscKeyDown(evt, replaceEditToTask);
-    document.removeEventListener(`keydown`, onCardCloseEsc);
-  };
-
-  const taskComponent = new TaskCard(card);
-
-  taskComponent.setEditButtonClickHandler(() => {
-    replaceTaskToEdit();
-    document.addEventListener(`keydown`, onCardCloseEsc);
-  });
-
-  const taskEditComponent = new TaskEditCard(card);
-
-  taskEditComponent.setFormSubmitHandler((evt) => {
-    evt.preventDefault();
-    replaceEditToTask();
-    document.removeEventListener(`keydown`, onCardCloseEsc);
-  });
-
-  renderComponent(taskCardsElement, taskComponent);
-};
 
 const renderTaskCards = (taskCardsElement, cards) => {
   cards.forEach((card) => {
