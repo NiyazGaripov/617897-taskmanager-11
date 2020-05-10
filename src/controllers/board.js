@@ -62,17 +62,6 @@ class BoardController {
 
     renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, showingTasksAmount));
     this._renderLoadMoreButton();
-
-    this._sortComponent.setSortTypeChangeHandler((sortType) => {
-      showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
-
-      const sortedTasks = sortTasks(cards, sortType, BEGIN_INDEX, showingTasksAmount);
-
-      taskCardsElement.innerHTML = ``;
-
-      renderTaskCards(taskCardsElement, sortedTasks);
-      this._renderLoadMoreButton();
-    });
   }
 
   _renderLoadMoreButton() {
@@ -94,6 +83,17 @@ class BoardController {
         removeComponent(this._loadMoreButtonComponent);
       }
     });
+  }
+
+  _onSortTypeChange() {
+    showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
+
+    const sortedTasks = sortTasks(cards, sortType, BEGIN_INDEX, showingTasksAmount);
+
+    taskCardsElement.innerHTML = ``;
+
+    renderTaskCards(taskCardsElement, sortedTasks);
+    this._renderLoadMoreButton();
   }
 }
 
