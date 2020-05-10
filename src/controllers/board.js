@@ -10,9 +10,9 @@ const TASK_CARDS_AMOUNT_ON_START = 8;
 const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
 
-const renderTaskCards = (taskCardsElement, cards) => {
+const renderTaskCards = (taskCardsElement, cards, onDataChange) => {
   return cards.map((card) => {
-    const taskController = new TaskController(taskCardsElement);
+    const taskController = new TaskController(taskCardsElement, onDataChange);
 
     taskController.render(card);
 
@@ -41,7 +41,7 @@ const sortTasks = (tasks, sortType, from, to) => {
 
 class BoardController {
   constructor(container) {
-    this.cards = [];
+    this._cards = [];
     this._showedTaskControllers = [];
     this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
     this._container = container;
@@ -50,14 +50,15 @@ class BoardController {
     this._taskListComponent = new TaskList();
     this._loadMoreButtonComponent = new LoadMoreButton();
 
+    this._onDataChange = this._onDataChange.bind(this);
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
     this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
 
   render(cards) {
-    this.cards = cards;
+    this._cards = cards;
     const container = this._container.getElement();
-    const isAllTasksArchived = this.cards.every((card) => card.isArchive);
+    const isAllTasksArchived = this._cards.every((card) => card.isArchive);
 
     if (isAllTasksArchived) {
       renderComponent(container, this._noTasksComponent);
@@ -68,7 +69,7 @@ class BoardController {
     renderComponent(container, this._taskListComponent);
 
     const taskCardsElement = this._taskListComponent.getElement();
-    const newTasks = renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, this._showingTasksAmount));
+    const newTasks = renderTaskCards(taskCardsElement, this._cards.slice(BEGIN_INDEX, this._showingTasksAmount), this._onDataChange);
     this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
     this._renderLoadMoreButton();
   }
@@ -76,7 +77,7 @@ class BoardController {
   _renderLoadMoreButton() {
     const container = this._container.getElement();
 
-    if (this._showingTasksAmount >= this.cards.length) {
+    if (this._showingTasksAmount >= this._cards.length) {
       return;
     }
 
@@ -87,12 +88,12 @@ class BoardController {
       const taskCardsElement = this._taskListComponent.getElement();
       this._showingTasksAmount = this._showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
 
-      const sortedTasks = sortTasks(this.cards, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksAmount);
+      const sortedTasks = sortTasks(this._cards, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksAmount);
 
-      const newTasks = renderTaskCards(taskCardsElement, sortedTasks);
+      const newTasks = renderTaskCards(taskCardsElement, sortedTasks, this._onDataChange);
       this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
 
-      if (this._showingTasksAmount >= this.cards.length) {
+      if (this._showingTasksAmount >= this._cards.length) {
         removeComponent(this._loadMoreButtonComponent);
       }
     });
@@ -102,13 +103,25 @@ class BoardController {
     this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
     const taskCardsElement = this._taskListComponent.getElement();
 
-    const sortedTasks = sortTasks(this.cards, sortType, BEGIN_INDEX, this._showingTasksAmount);
+    const sortedTasks = sortTasks(this._cards, sortType, BEGIN_INDEX, this._showingTasksAmount);
 
     taskCardsElement.innerHTML = ``;
 
-    const newTasks = renderTaskCards(taskCardsElement, sortedTasks);
+    const newTasks = renderTaskCards(taskCardsElement, sortedTasks, this._onDataChange);
     this._showedTaskControllers = newTasks;
     this._renderLoadMoreButton();
+  }
+
+  _onDataChange(taskController, oldData, newData) {
+    const index = this._cards.findIndex((it) => it === oldData);
+
+    if (index === -1) {
+      return;
+    }
+
+    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
+
+    taskController.render(this._cards[index]);
   }
 }
 
