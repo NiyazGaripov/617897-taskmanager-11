@@ -1,14 +1,14 @@
 import {renderComponent, replaceComponent} from './../utils/render.js';
 import {TaskCard} from './../components/task-card.js';
 import {TaskEditCard} from './../components/task-edit-card.js';
-import {onEscKeyDown} from './../utils/common.js';
+import {ESC_KEYCODE} from './../constants.js';
 
 class TaskController {
   constructor(container) {
     this._container = container;
     this._taskComponent = null;
     this._taskEditComponent = null;
-    this._onEscKeyDown = onEscKeyDown.bind(this);
+    this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
   render(card) {
@@ -17,7 +17,7 @@ class TaskController {
 
     this._taskComponent.setEditButtonClickHandler(() => {
       this._replaceTaskToEdit();
-      document.addEventListener(`keydown`, this._onCardCloseEsc);
+      document.addEventListener(`keydown`, this._onEscKeyDown);
     });
 
     this._taskEditComponent.setFormSubmitHandler((evt) => {
@@ -33,13 +33,15 @@ class TaskController {
   }
 
   _replaceEditToTask() {
-    document.removeEventListener(`keydown`, this._onCardCloseEsc);
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
     replaceComponent(this._taskComponent, this._taskEditComponent);
   }
 
-  _onCardCloseEsc(evt) {
-    this._onEscKeyDown(evt, this._replaceEditToTask);
-    document.removeEventListener(`keydown`, this._onCardCloseEsc);
+  _onEscKeyDown(evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      this._replaceEditToTask();
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
+    }
   }
 }
 
