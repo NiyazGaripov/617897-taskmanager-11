@@ -43,4 +43,6 @@ const SortType = {
   DEFAULT: `default`,
 };
 
-export {DESCRIPTION_CARDS, DAYS, COLORS, MONTH_NAMES, SortType};
+const ESC_KEYCODE = 27;
+
+export {DESCRIPTION_CARDS, DAYS, COLORS, MONTH_NAMES, SortType, ESC_KEYCODE};
