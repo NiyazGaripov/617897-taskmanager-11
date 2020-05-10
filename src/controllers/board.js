@@ -11,8 +11,12 @@ const TASK_CARDS_AMOUNT_LOAD_MORE = 8;
 const BEGIN_INDEX = 0;
 
 const renderTaskCards = (taskCardsElement, cards) => {
-  cards.forEach((card) => {
-    renderTaskCard(taskCardsElement, card);
+  return cards.map((card) => {
+    const taskController = new TaskController(taskCardsElement);
+
+    taskController.render(card);
+
+    return taskController;
   });
 };
 
@@ -38,6 +42,7 @@ const sortTasks = (tasks, sortType, from, to) => {
 class BoardController {
   constructor(container) {
     this.cards = [];
+    this._showedTaskControllers = [];
     this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
     this._container = container;
     this._noTasksComponent = new NoTaskList();
@@ -63,8 +68,8 @@ class BoardController {
     renderComponent(container, this._taskListComponent);
 
     const taskCardsElement = this._taskListComponent.getElement();
-
-    renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, this._showingTasksAmount));
+    const newTasks = renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, this._showingTasksAmount));
+    this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
     this._renderLoadMoreButton();
   }
 
@@ -84,7 +89,8 @@ class BoardController {
 
       const sortedTasks = sortTasks(this.cards, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksAmount);
 
-      renderTaskCards(taskCardsElement, sortedTasks);
+      const newTasks = renderTaskCards(taskCardsElement, sortedTasks);
+      this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
 
       if (this._showingTasksAmount >= this.cards.length) {
         removeComponent(this._loadMoreButtonComponent);
@@ -100,7 +106,8 @@ class BoardController {
 
     taskCardsElement.innerHTML = ``;
 
-    renderTaskCards(taskCardsElement, sortedTasks);
+    const newTasks = renderTaskCards(taskCardsElement, sortedTasks);
+    this._showedTaskControllers = newTasks;
     this._renderLoadMoreButton();
   }
 }
