@@ -37,16 +37,22 @@ const sortTasks = (tasks, sortType, from, to) => {
 
 class BoardController {
   constructor(container) {
+    this.cards = [];
+    this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
     this._container = container;
     this._noTasksComponent = new NoTaskList();
     this._sortComponent = new Sort();
     this._taskListComponent = new TaskList();
     this._loadMoreButtonComponent = new LoadMoreButton();
+
+    this._onSortTypeChange = this._onSortTypeChange.bind(this);
+    this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
 
   render(cards) {
+    this.cards = cards;
     const container = this._container.getElement();
-    const isAllTasksArchived = cards.every((card) => card.isArchive);
+    const isAllTasksArchived = this.cards.every((card) => card.isArchive);
 
     if (isAllTasksArchived) {
       renderComponent(container, this._noTasksComponent);
@@ -58,37 +64,39 @@ class BoardController {
 
     const taskCardsElement = this._taskListComponent.getElement();
 
-    let showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
-
-    renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, showingTasksAmount));
+    renderTaskCards(taskCardsElement, cards.slice(BEGIN_INDEX, this._showingTasksAmount));
     this._renderLoadMoreButton();
   }
 
   _renderLoadMoreButton() {
-    if (showingTasksAmount >= cards.length) {
+    const container = this._container.getElement();
+
+    if (this._showingTasksAmount >= this.cards.length) {
       return;
     }
 
     renderComponent(container, this._loadMoreButtonComponent);
 
     this._loadMoreButtonComponent.setClickHandler(() => {
-      const prevTasksCount = showingTasksAmount;
-      showingTasksAmount = showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
+      const prevTasksCount = this._showingTasksAmount;
+      const taskCardsElement = this._taskListComponent.getElement();
+      this._showingTasksAmount = this._showingTasksAmount + TASK_CARDS_AMOUNT_LOAD_MORE;
 
-      const sortedTasks = sortTasks(cards, this._sortComponent.getSortType(), prevTasksCount, showingTasksAmount);
+      const sortedTasks = sortTasks(this.cards, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksAmount);
 
       renderTaskCards(taskCardsElement, sortedTasks);
 
-      if (showingTasksAmount >= cards.length) {
+      if (this._showingTasksAmount >= this.cards.length) {
         removeComponent(this._loadMoreButtonComponent);
       }
     });
   }
 
-  _onSortTypeChange() {
-    showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
+  _onSortTypeChange(sortType) {
+    this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
+    const taskCardsElement = this._taskListComponent.getElement();
 
-    const sortedTasks = sortTasks(cards, sortType, BEGIN_INDEX, showingTasksAmount);
+    const sortedTasks = sortTasks(this.cards, sortType, BEGIN_INDEX, this._showingTasksAmount);
 
     taskCardsElement.innerHTML = ``;
 
