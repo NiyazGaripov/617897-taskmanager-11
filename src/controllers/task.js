@@ -4,8 +4,9 @@ import {TaskEditCard} from './../components/task-edit-card.js';
 import {ESC_KEYCODE} from './../constants.js';
 
 class TaskController {
-  constructor(container) {
+  constructor(container, onDataChange) {
     this._container = container;
+    this._onDataChange = onDataChange;
     this._taskComponent = null;
     this._taskEditComponent = null;
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
@@ -18,6 +19,18 @@ class TaskController {
     this._taskComponent.setEditButtonClickHandler(() => {
       this._replaceTaskToEdit();
       document.addEventListener(`keydown`, this._onEscKeyDown);
+    });
+
+    this._taskComponent.setArchiveButtonClickHandler(() => {
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isArchive: !card.isArchive,
+      }));
+    });
+
+    this._taskComponent.setFavoritesButtonClickHandler(() => {
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isFavorite: !card.isFavorite,
+      }));
     });
 
     this._taskEditComponent.setFormSubmitHandler((evt) => {
