@@ -122,6 +122,16 @@ class TaskEditCard extends AbstractSmartComponent {
     super.rerender();
   }
 
+  reset() {
+    const task = this._task;
+
+    this._isDateShowing = !!task.dueDate;
+    this._isRepeatingTask = Object.values(task.repeatingDays).some(Boolean);
+    this._activeRepeatingDays = Object.assign({}, task.repeatingDays);
+
+    this.rerender();
+  }
+
   setFormSubmitHandler(callback) {
     this.getElement()
       .querySelector(`form`)
