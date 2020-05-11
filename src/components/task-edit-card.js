@@ -94,10 +94,17 @@ class TaskEditCard extends AbstractSmartComponent {
   constructor(task) {
     super();
     this._task = task;
+    this._submitHandler = null;
+    this._subscribeOnEvents();
   }
 
   getTemplate() {
     return createTaskEditCardComponent(this._task);
+  }
+
+  recoveryListeners() {
+    this.setFormSubmitHandler(this._submitHandler);
+    this._subscribeOnEvents();
   }
 
   setFormSubmitHandler(callback) {
