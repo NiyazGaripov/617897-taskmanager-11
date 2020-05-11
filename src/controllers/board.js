@@ -99,6 +99,18 @@ class BoardController {
     });
   }
 
+  _onDataChange(taskController, oldData, newData) {
+    const index = this._cards.findIndex((it) => it === oldData);
+
+    if (index === -1) {
+      return;
+    }
+
+    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
+
+    taskController.render(this._cards[index]);
+  }
+
   _onSortTypeChange(sortType) {
     this._showingTasksAmount = TASK_CARDS_AMOUNT_ON_START;
     const taskCardsElement = this._taskListComponent.getElement();
@@ -110,18 +122,6 @@ class BoardController {
     const newTasks = renderTaskCards(taskCardsElement, sortedTasks, this._onDataChange);
     this._showedTaskControllers = newTasks;
     this._renderLoadMoreButton();
-  }
-
-  _onDataChange(taskController, oldData, newData) {
-    const index = this._cards.findIndex((it) => it === oldData);
-
-    if (index === -1) {
-      return;
-    }
-
-    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
-
-    taskController.render(this._cards[index]);
   }
 }
 
