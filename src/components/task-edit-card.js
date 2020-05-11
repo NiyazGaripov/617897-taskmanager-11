@@ -2,7 +2,7 @@ import {MONTH_NAMES, DAYS, COLORS} from './../constants.js';
 import {getTime} from './../utils/time.js';
 import {createRepeatingDaysComponent} from './days.js';
 import {createColorsComponent} from './colors.js';
-import {AbstractComponent} from './abstract-component.js';
+import {AbstractSmartComponent} from './abstract-smart-component.js';
 
 const createTaskEditCardComponent = (task) => {
   const {description, dueDate, color, repeatingDays} = task;
@@ -90,7 +90,7 @@ const createTaskEditCardComponent = (task) => {
   );
 };
 
-class TaskEditCard extends AbstractComponent {
+class TaskEditCard extends AbstractSmartComponent {
   constructor(task) {
     super();
     this._task = task;
