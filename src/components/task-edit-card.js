@@ -4,6 +4,10 @@ import {createRepeatingDaysComponent} from './days.js';
 import {createColorsComponent} from './colors.js';
 import {AbstractSmartComponent} from './abstract-smart-component.js';
 
+const isRepeating = (repeatingDays) => {
+  return Object.values(repeatingDays).some(Boolean);
+};
+
 const createTaskEditCardComponent = (task) => {
   const {description, dueDate, color, repeatingDays} = task;
 
