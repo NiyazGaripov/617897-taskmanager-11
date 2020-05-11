@@ -107,10 +107,16 @@ class TaskEditCard extends AbstractSmartComponent {
     this._subscribeOnEvents();
   }
 
+  rerender() {
+    super.rerender();
+  }
+
   setFormSubmitHandler(callback) {
     this.getElement()
       .querySelector(`form`)
       .addEventListener(`submit`, callback);
+
+    this._submitHandler = callback;
   }
 }
 
